@@ -1,0 +1,26 @@
+{
+  "name": "g4.es6.router",
+  "version": "0.0.1",
+  "description": "JS ES6 Router",
+  "main": "./src/router.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/g4code/g4.es6.router.git"
+  },
+  "keywords": [
+    "g4.es6.router"
+  ],
+  "author": "G4 Code <office@g4code.com>",
+  "maintainers": [
+    "Drasko Gomboc <drasko.gomboc@gmail.com>",
+    "Zeljko Simic <zeljkosbgd@gmail.com>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/g4code/g4.es6.router/issues"
+  },
+  "homepage": "https://github.com/g4code/g4.es6.router#readme"
+}

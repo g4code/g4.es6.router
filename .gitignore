@@ -1,0 +1,9 @@
+nbproject/
+.idea
+.settings
+.buildpath
+.project
+composer.phar
+playground/*
+.DS_Store
+src/.DS_Store
