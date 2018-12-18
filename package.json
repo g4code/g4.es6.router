@@ -1,6 +1,6 @@
 {
   "name": "g4.es6.router",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "JS ES6 Router",
   "main": "./src/router.js",
   "scripts": {
