@@ -37,4 +37,20 @@ export default class Request {
     getPort () {
         return location.port
     }
+
+    static matchPath (locationPath, routePath) {
+        locationPath = locationPath.split('/')
+        routePath = routePath.split('/')
+
+        if(locationPath.length === routePath.length){
+            let isUriPath = true;
+            for(let key in locationPath) {
+                if(locationPath[key] !== routePath[key] && !/^:/.test( routePath[key])){
+                    isUriPath = false;
+                }
+            }
+            return isUriPath
+        }
+        return false;
+    }
 }

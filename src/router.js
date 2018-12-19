@@ -1,12 +1,9 @@
 import Request from './request.js'
 
-
-
 export default class Router  {
 
     constructor () {
         this.routes = {}
-        this.currentPath;
     }
 
     add (options) {
@@ -16,59 +13,35 @@ export default class Router  {
     }
 
     destroyPrevRouteIfExist () {
-        let route = this.findRoute(this.currentPath)
-        if (route !== undefined && route.runner !== undefined) {
-            new route.runner().destroy()
+        if (this.currentRoute !== undefined && this.currentRoute.runner !== undefined) {
+            new this.currentRoute.runner().destroy()
         }
+        return this
     }
 
     run () {
-        let request = new Request()
-        let route = this.findRoute( request.getPath())
+        this.request = new Request()
         this.destroyPrevRouteIfExist()
-        this.runCurrentRoute(route, request)
+            .runCurrentRoute( this.findRoute(this.request.getPath()) )
     }
 
-    runCurrentRoute (route, request) {
+    runCurrentRoute (route) {
         if (route === undefined) {
             console.log(`Rout ${path} not exists`)
             return false;
         }
 
-        if (route.callback !== undefined) {
-            route.callback.call(this, request)
-        }
+        route.callback !== undefined
+            ? route.callback.call(this, this.request)
+            : new route.runner().run(this.request)
 
-        if (route.runner !== undefined) {
-            new route.runner().run(request)
-        }
-
-        this.currentPath = request.getPath()
+        this.currentRoute = route
     }
 
     findRoute (path) {
         if (typeof path === 'string') {
-            let key = Object.keys(this.routes).find(route => this.matchPath(path, route))
+            let key = Object.keys(this.routes).find(route => Request.matchPath(path, route))
             return this.routes[key]
         }
     }
-
-
-    matchPath (locationPath, routePath) {
-        locationPath = locationPath.split('/')
-        routePath = routePath.split('/')
-
-        if(locationPath.length === routePath.length){
-            let isUriPath = true;
-            for(let key in locationPath) {
-                if(locationPath[key] !== routePath[key] && !/^:/.test( routePath[key])){
-                    isUriPath = false;
-                }
-            }
-            return isUriPath
-        }
-
-        return false;
-    }
-
 }
